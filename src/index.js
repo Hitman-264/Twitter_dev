@@ -25,9 +25,12 @@ app.listen(3000, async ()=>{
     //     content : 'new comment added'
     // });
 
-    const tweet = await tweeto.getwithComments('658941a766d45430542a2e75');
-    console.log(tweet);
+    // const tweet = await tweeto.getwithComments('658941a766d45430542a2e75');
+    // console.log(tweet);
     // tweet.comments.push(comm);
     // await tweet.save();
     // console.log(tweet);
+    const tweet = await tweeto.getAll(0,0);
+    console.log(tweet[1].contentwithEmail);
+
 })
