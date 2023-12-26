@@ -20,5 +20,11 @@ tweetSchema.virtual('contentwithEmail').get(function process(){
     return `${this.content}\nCreated by: ${this.userEmail}`;
 })
 
+tweetSchema.pre('save', function(){
+    console.log("Inside hook");
+    this.content += '.....';
+    next();
+})
+
 const Tweet = mongoose.model('Tweet', tweetSchema);
 module.exports = Tweet;
