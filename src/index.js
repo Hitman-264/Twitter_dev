@@ -1,9 +1,11 @@
-const express = require('express');
-const connect = require('./config/database');
+import express from 'express';
+
+import {connect} from './config/database.js';
 
 const app = express();
 
-const TweetService = require('./services/tweet_service');
+// const TweetService = require('./services/tweet_service');
+import TweetService from './services/tweet_service.js';
 const tweeto = new TweetService();
 
 app.listen(3000, async ()=>{
