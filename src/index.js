@@ -15,7 +15,7 @@ app.listen(3000, async ()=>{
 
 
     const tweet = await tweeto.create({
-        content :'Is #tweets working?'
+        content :'#Nature is blessing ' 
     }) 
     console.log(tweet);
 })

@@ -9,24 +9,30 @@ import {TweetRepository, HashtagRepository} from '../repository/index.js';
     async create(data){
         const content = data.content;
         let tags = content.match(/#[a-zA-Z0-9_]+/g); // this regex extracts hashtags
-        tags = tags.map((tag) => tag.substring(1));
+        tags = tags.map((tag) => tag.substring(1))
+                   .map(tag => tag.toLowerCase());
+
       
         const tweet = await this.tweetRepository.create(data);
+
         let alreadyPresentTags = await this.hashtagRepository.findByName(tags);
         
         let titleofPresenttags = alreadyPresentTags.map(tag => tag.title);
 
         let newTags = tags.filter(tag => !titleofPresenttags.includes(tag));
-       
+        
         newTags = newTags.map(tag => {
             return {title : tag, tweets : [tweet.id]} 
         });
        
-        await this.hashtagRepository.bulkCreate(newTags);
+        const response = await this.hashtagRepository.bulkCreate(newTags);
+        
         alreadyPresentTags.forEach(tag => {
             tag.tweets.push(tweet.id);
             tag.save();
         });
+        
+        
 
         // [excited,coding,js,career] -> [{title:excited}, {title:career}]
         // todo create hashtags and add here
