@@ -1,21 +1,18 @@
 import express from 'express';
-
+import bodyParser from 'body-parser';
 import {connect} from './config/database.js';
 
+import apiRoutes from './routes/index.js';
 const app = express();
 
-// const TweetService = require('./services/tweet_service');
-import TweetService from './services/tweet_service.js';
-const tweeto = new TweetService();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use('/api', apiRoutes);
+
 
 app.listen(3000, async ()=>{
     console.log("Server started");
     await connect();
     console.log("Mongodb connected");
 
-
-    const tweet = await tweeto.create({
-        content :'#Nature is blessing ' 
-    }) 
-    console.log(tweet);
 })

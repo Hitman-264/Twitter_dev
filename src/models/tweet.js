@@ -5,8 +5,6 @@ const tweetSchema = new mongoose.Schema({
         required: true,
         maxLength : [250, 'Tweet cannot be more than 250 characters'],
     },
-  
-
 }, {timestamps:true});
 
 const Tweet = mongoose.model('Tweet', tweetSchema);
