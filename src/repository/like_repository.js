@@ -14,10 +14,9 @@ class LikeRepository extends CrudRepository{
             throw error;
         }
     }
-    async findByIdAndDelete(id){
+    async remove(id){
         try{
              await Like.findByIdAndDelete(id);
-        
         }catch(error){
             console.log(error);
         }
