@@ -5,7 +5,14 @@ import {TweetRepository, HashtagRepository} from '../repository/index.js';
         this.tweetRepository = new TweetRepository();
         this.hashtagRepository = new HashtagRepository();
     }
-
+    async get(tweetId){
+        try{
+            const result = this.tweetRepository.getwithComments(tweetId);
+            return result;
+        }catch(error){
+            console.log("Something went wrong at tweet service layer")
+        }
+    }
     async create(data){
         const content = data.content;
         let tags = content.match(/#[a-zA-Z0-9_]+/g); // this regex extracts hashtags
